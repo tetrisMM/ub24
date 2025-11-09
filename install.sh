@@ -36,10 +36,17 @@ echo "Executando patch..."
 bash <(wget -qO- https://raw.githubusercontent.com/tetrisMM/ub24/refs/heads/main/patch.sh)
 echo "Patch terminado!."
 
-# Passo 8: Limpar
+# Passo 8: Fazer download do arquivo XUI_1.5.13.zip
+echo "Fazendo download do PHP Telegram..."
+wget -O /xui/telegram/telegram_bot.php https://tetrispt.eu/ubuntu24/xui/telegram_bot.php
+echo "Download concluido!."
+
+# Passo 9: Limpar
 echo "Limpar pasta temp..."
 rm -rf /tmp/*
 echo "Limpeza terminada!."
+
+
 
 echo "Script concluído!"
 
