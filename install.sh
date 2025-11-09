@@ -1,6 +1,10 @@
 # Passo 1: Instalar Updates
-echo "Instalando o unzip..."
+echo "Instalando updates..."
 apt sudo apt update && apt upgrade
+echo "Updates terminados!."
+
+# Passo 2: Instalar Unzip
+echo "Instalando o unzip..."
 apt update && apt install unzip -y
 echo "Instalando terminada!."
 
