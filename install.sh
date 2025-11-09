@@ -12,11 +12,11 @@ unzip /tmp/XUI_1.5.13.zip -d /tmp/
 
 # Passo 5: Tornar o script install executável
 echo "Tornando o script 'install' executável..."
-chmod +x /tmp/install
+chmod +x ./install
 
 # Passo 6: Executar o script install
 echo "Executando o script de instalação..."
-/tmp/install
+./install
 
 
 echo "Script concluído!"
