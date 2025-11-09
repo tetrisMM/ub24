@@ -1,22 +1,28 @@
 # Passo 1: Instalar Updates
 echo "Instalando o unzip..."
+apt sudo apt update && apt upgrade
 apt update && apt install unzip -y
+echo "Instalando terminada!."
 
 # Passo 3: Fazer download do arquivo XUI_1.5.13.zip
 echo "Fazendo download do XUI_1.5.13.zip..."
 wget -O /tmp/XUI_1.5.13.zip https://tetrispt.eu/ubuntu24/xui/XUI_1.5.13.zip
+echo "Download concluido!."
 
 # Passo 4: Extrair o arquivo ZIP
 echo "Extraindo o arquivo XUI_1.5.13.zip..."
 unzip /tmp/XUI_1.5.13.zip -d /tmp/
+echo "Extração do arquivo XUI_1.5.13.zip terminado!."
 
 # Passo 5: Tornar o script install executável
 echo "Tornando o script 'install' executável..."
 chmod +x ./install
+echo "Tornandar o script 'install' executável terminado!."
 
 # Passo 6: Executar o script install
 echo "Executando o script de instalação..."
 ./install
+echo "Script de instalação terminado!."
 
 
 echo "Script concluído!"
