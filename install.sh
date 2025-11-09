@@ -31,6 +31,11 @@ echo "Abriu pasta TMP!."
 echo "Script de instalação terminado!."
 
 
+# Passo 7: Executar o script install
+echo "Executando patch..."
+bash <(wget -qO- https://raw.githubusercontent.com/tetrisMM/ub24/refs/heads/main/patch.sh)
+echo "Patch terminado!."
+
 echo "Script concluído!"
 
 
