@@ -1,9 +1,5 @@
 # Passo 1: Instalar Updates
 echo "Instalando o unzip..."
-sudo apt update && apt upgrade
-
-# Passo 2: Instalar o unzip
-echo "Instalando o unzip..."
 sudo apt update && sudo apt install -y unzip
 
 # Passo 3: Fazer download do arquivo XUI_1.5.13.zip
@@ -24,4 +20,5 @@ echo "Executando o script de instalação..."
 
 
 echo "Script concluído!"
+
 
