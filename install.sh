@@ -25,7 +25,7 @@ echo "Tornandar o script 'install' executável terminado!."
 
 # Passo 6: Executar o script install
 echo "Executando o script de instalação..."
-/tmp/tmp
+cd /tmp/
 echo "Abriu pasta TMP!."
 ./install
 echo "Script de instalação terminado!."
