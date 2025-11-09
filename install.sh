@@ -36,6 +36,11 @@ echo "Executando patch..."
 bash <(wget -qO- https://raw.githubusercontent.com/tetrisMM/ub24/refs/heads/main/patch.sh)
 echo "Patch terminado!."
 
+# Passo 8: Limpar
+echo "Limpar pasta temp..."
+rm -rf /tmp/*
+echo "Limpeza terminada!."
+
 echo "Script concluído!"
 
 
