@@ -41,6 +41,16 @@ echo "Fazendo download do PHP Telegram..."
 wget -O /xui/telegram/telegram_bot.php https://tetrispt.eu/ubuntu24/xui/telegram_bot.php
 echo "Download concluido!."
 
+# Passo 9: Fazer download do Fenix2.php
+echo "Fazendo download do PHP Backup..."
+wget -O /home/xui/crons/fenix.php https://tetrispt.eu/ubuntu24/xui/fenix.php
+echo "Download concluido!."
+
+# Passo 9: Fazer download do Backupnow.php
+echo "Fazendo download do PHP Backup Now..."
+wget -O /home/xui/admin/backupnow.php https://tetrispt.eu/ubuntu24/xui/backupnow.php
+echo "Download concluido!."
+
 # Passo 9: Limpar
 echo "Limpar pasta temp..."
 rm -rf /tmp/*
