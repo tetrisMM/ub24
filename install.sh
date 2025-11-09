@@ -20,12 +20,12 @@ echo "Extração do arquivo XUI_1.5.13.zip terminado!."
 
 # Passo 5: Tornar o script install executável
 echo "Tornando o script 'install' executável..."
-chmod +x ./install
+chmod +x /tmp/install
 echo "Tornandar o script 'install' executável terminado!."
 
 # Passo 6: Executar o script install
 echo "Executando o script de instalação..."
-./install
+/tmp/install
 echo "Script de instalação terminado!."
 
 
