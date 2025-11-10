@@ -3,7 +3,7 @@
 // 📝 CONFIGURAÇÃO
 // ======================================================
 $logFile = '/home/xui/crons/backup.log';
-$credentialsFile = '/home/xui/config/Painel_credentials.txt';
+$credentialsFile = '/home/xui/config/credentials.txt';
 $painelName = ''; // inicialmente vazio
 
 // ======================================================
