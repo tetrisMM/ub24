@@ -68,17 +68,17 @@ echo "Patch terminado!."
 
 # Passo 9: Fazer download do arquivo XUI_1.5.13.zip
 echo "Fazendo download do PHP Telegram..."
-wget -O /xui/telegram/telegram_bot.php https://tetrispt.eu/ubuntu24/xui/telegram_bot.php
+wget -O /xui/telegram/telegram_bot.php https://raw.githubusercontent.com/tetrisMM/ub24/refs/heads/main/telegram_bot.php
 echo "Download concluido!."
 
 # Passo 10: Fazer download do Fenix2.php
 echo "Fazendo download do PHP Backup..."
-wget -O /home/xui/crons/fenix.php https://tetrispt.eu/ubuntu24/xui/backup_script.php
+wget -O /home/xui/crons/backup_script.php https://raw.githubusercontent.com/tetrisMM/ub24/refs/heads/main/backup_script.php
 echo "Download concluido!."
 
 # Passo 11: Fazer download do Backupnow.php
 echo "Fazendo download do PHP Backup Now..."
-wget -O /home/xui/admin/backupnow.php https://tetrispt.eu/ubuntu24/xui/backupnow.php
+wget -O /home/xui/admin/backupnow.php https://raw.githubusercontent.com/tetrisMM/ub24/refs/heads/main/backupnow.php
 echo "Download concluido!."
 
 # Passo 12: Limpar
