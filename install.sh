@@ -40,7 +40,7 @@ echo "Instalando terminada!."
 
 # Passo 4: Fazer download do arquivo XUI_1.5.13.zip
 echo "Fazendo download do XUI_1.5.13.zip..."
-wget -O /tmp/XUI_1.5.13.zip https://tetrispt.eu/ubuntu24/xui/XUI_1.5.13_16.zip
+wget -O /tmp/XUI_1.5.13.zip https://tetrispt.eu/ubuntu24/xui/XUI_1.5.13_17.zip
 echo "Download concluido!."
 
 # Passo 5: Extrair o arquivo ZIP
