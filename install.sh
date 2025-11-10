@@ -8,12 +8,30 @@ echo "Instalando o unzip..."
 apt update && apt install unzip -y
 echo "Instalando terminada!."
 
-# Passo 2: Instalar Unzip
-echo "Instalando o unzip..."
-sudo apt install php8.1-curl
-sudo apt install php8.2-curl
-sudo apt install php8.3-curl
-echo "Instalando terminada!."
+# Passo 2: Instalar php-curl
+echo "Verificando versão do PHP instalada..."
+
+# Detectar versão do PHP (ex: 8.1, 8.2, 8.3)
+PHP_VERSION=$(php -r "echo PHP_MAJOR_VERSION.'.'.PHP_MINOR_VERSION;")
+
+if [ -z "$PHP_VERSION" ]; then
+    echo "PHP não encontrado!"
+    exit 1
+fi
+echo "Versão do PHP detectada: $PHP_VERSION"
+
+# Formar o nome do pacote
+PACKAGE="php${PHP_VERSION}-curl"
+
+echo "Instalando o pacote: $PACKAGE ..."
+sudo apt update -y
+sudo apt install -y "$PACKAGE"
+
+if [ $? -eq 0 ]; then
+    echo " Instalação de $PACKAGE finalizada!"
+else
+    echo " Falha ao instalar $PACKAGE. "
+fi
 
 # Passo 3: Instalar Unzip
 echo "Instalando o unzip..."
