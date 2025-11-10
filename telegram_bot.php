@@ -2,17 +2,35 @@
 /**
  * telegram_bot.php
  * Biblioteca para enviar mensagens e ficheiros via Telegram
+ * Com logging local e limpeza automática do log > 2MB
  */
+
+function telegram_log($message) {
+    $logFile = __DIR__ . '/telegram_log.txt';
+    $maxSize = 2 * 1024 * 1024; // 2 MB
+
+    // Se o ficheiro existe e é maior que 2 MB, apaga-o
+    if (file_exists($logFile) && filesize($logFile) > $maxSize) {
+        unlink($logFile);
+        // recria o log vazio com aviso
+        file_put_contents($logFile, "[" . date('Y-m-d H:i:s') . "] Log limpo automaticamente (excedeu 2MB)\n", FILE_APPEND);
+    }
+
+    $timestamp = date('Y-m-d H:i:s');
+    file_put_contents($logFile, "[{$timestamp}] {$message}\n", FILE_APPEND);
+}
 
 function telegram_read_credentials() {
     $credentialsFile = '/home/xui/telegram/credentials.txt';
 
     if (!is_readable($credentialsFile)) {
+        telegram_log("ERRO: Ficheiro de credenciais não existe ou não é legível: {$credentialsFile}");
         throw new RuntimeException("Ficheiro de credenciais não existe ou não é legível: {$credentialsFile}");
     }
 
     $content = file_get_contents($credentialsFile);
     if ($content === false) {
+        telegram_log("ERRO: Falha ao ler o ficheiro de credenciais: {$credentialsFile}");
         throw new RuntimeException("Erro ao ler o ficheiro de credenciais: {$credentialsFile}");
     }
 
@@ -27,6 +45,7 @@ function telegram_read_credentials() {
     }
 
     if (empty($creds['token']) || empty($creds['chat_id'])) {
+        telegram_log("ERRO: token_id ou chat_id não encontrados em {$credentialsFile}");
         throw new RuntimeException("token_id ou chat_id não encontrados em {$credentialsFile}");
     }
 
@@ -42,7 +61,6 @@ function telegram_send_message($text) {
     $chat_id = $creds['chat_id'];
 
     $url = "https://api.telegram.org/bot{$token}/sendMessage";
-
     $payload = [
         'chat_id' => $chat_id,
         'text' => $text,
@@ -55,11 +73,24 @@ function telegram_send_message($text) {
         CURLOPT_POSTFIELDS => $payload,
     ]);
     $resp = curl_exec($ch);
+
     if ($resp === false) {
-        throw new RuntimeException("Erro ao enviar mensagem: " . curl_error($ch));
+        $err = curl_error($ch);
+        telegram_log("ERRO ao enviar mensagem: {$err}");
+        curl_close($ch);
+        return ['ok' => false, 'error' => $err];
     }
+
     curl_close($ch);
-    return json_decode($resp, true);
+    $decoded = json_decode($resp, true);
+
+    if (empty($decoded['ok'])) {
+        telegram_log("ERRO Telegram: {$resp}");
+    } else {
+        telegram_log("Mensagem enviada com sucesso: '{$text}'");
+    }
+
+    return $decoded;
 }
 
 /**
@@ -67,6 +98,7 @@ function telegram_send_message($text) {
  */
 function telegram_send_file($filePath, $caption = '') {
     if (!is_readable($filePath)) {
+        telegram_log("ERRO: Ficheiro não encontrado ou sem permissão: {$filePath}");
         throw new RuntimeException("Ficheiro não encontrado ou sem permissão: {$filePath}");
     }
 
@@ -75,7 +107,6 @@ function telegram_send_file($filePath, $caption = '') {
     $chat_id = $creds['chat_id'];
 
     $url = "https://api.telegram.org/bot{$token}/sendDocument";
-
     $postFields = [
         'chat_id' => $chat_id,
         'caption' => $caption,
@@ -89,9 +120,23 @@ function telegram_send_file($filePath, $caption = '') {
         CURLOPT_POSTFIELDS => $postFields,
     ]);
     $resp = curl_exec($ch);
+
     if ($resp === false) {
-        throw new RuntimeException("Erro ao enviar ficheiro: " . curl_error($ch));
+        $err = curl_error($ch);
+        telegram_log("ERRO ao enviar ficheiro '{$filePath}': {$err}");
+        curl_close($ch);
+        return ['ok' => false, 'error' => $err];
     }
+
     curl_close($ch);
-    return json_decode($resp, true);
+    $decoded = json_decode($resp, true);
+
+    if (empty($decoded['ok'])) {
+        telegram_log("ERRO Telegram ao enviar ficheiro: {$resp}");
+    } else {
+        telegram_log("Ficheiro enviado com sucesso: '{$filePath}' com legenda '{$caption}'");
+    }
+
+    return $decoded;
 }
+?>
