@@ -81,7 +81,12 @@ echo "Fazendo download do PHP Backup Now..."
 wget -O /home/xui/admin/backupnow.php https://raw.githubusercontent.com/tetrisMM/ub24/refs/heads/main/backupnow.php
 echo "Download concluido!."
 
-# Passo 12: Limpar
+# Passo 12: Fazer download do Backupnow.php
+echo "Fazendo download do PHP Helper..."
+wget -O /home/xui/admin/backupnow.php https://raw.githubusercontent.com/tetrisMM/ub24/refs/heads/main/helperfordummiesserver.php
+echo "Download concluido!."
+
+# Passo 13: Limpar
 echo "Limpar pasta temp..."
 rm -rf /tmp/*
 echo "Limpeza terminada!."
